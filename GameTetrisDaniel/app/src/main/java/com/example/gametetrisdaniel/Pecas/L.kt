@@ -11,8 +11,6 @@ class L(linha:Int,coluna:Int) : Piece(linha, coluna) {
         pontoD = Ponto(linha,coluna+1)
     }
 
-
-
     override fun moveDown() {
         pontoA.moveDown()
         pontoB.moveDown()
@@ -21,11 +19,19 @@ class L(linha:Int,coluna:Int) : Piece(linha, coluna) {
     }
 
     override fun moveRight() {
+        pontoA.moveRight()
+        pontoB.moveRight()
+        pontoC.moveRight()
+        pontoD.moveRight()
 
     }
 
     override fun moveLeft() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        pontoA.moveLeft()
+        pontoB.moveLeft()
+        pontoC.moveLeft()
+        pontoD.moveLeft()
+
     }
 
     override fun moveRotate() {

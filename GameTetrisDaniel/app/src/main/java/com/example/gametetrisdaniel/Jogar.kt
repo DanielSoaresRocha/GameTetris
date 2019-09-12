@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.ImageView
+import com.example.gametetrisdaniel.Pecas.L
 import com.example.gametetrisdaniel.Pecas.Ponto
 import kotlinx.android.synthetic.main.activity_jogar.*
 
@@ -13,7 +14,7 @@ class Jogar : AppCompatActivity() {
     var running = true
     var speed : Long = 300
 
-    var pt = Ponto(0,17)
+    var pt = L(0,17)
 
     var board = Array(LINHA) {
         Array(COLUNA){0}
@@ -40,6 +41,18 @@ class Jogar : AppCompatActivity() {
         }
 
         gameRun()
+
+        direitaBtn.setOnClickListener {
+            pt.moveRight()
+        }
+
+        esquerdaBtn.setOnClickListener {
+            pt.moveLeft()
+        }
+
+        baixoBtn.setOnClickListener {
+            pt.moveDown()
+        }
     }
     fun gameRun(){
         Thread{
@@ -56,7 +69,10 @@ class Jogar : AppCompatActivity() {
                     pt.moveDown()
                     //print peça
                     try {
-                        tabuleiro[pt.linha][pt.coluna]!!.setImageResource(R.drawable.white)
+                        tabuleiro[pt.pontoA.linha][pt.pontoA.coluna]!!.setImageResource(R.drawable.white)
+                        tabuleiro[pt.pontoB.linha][pt.pontoB.coluna]!!.setImageResource(R.drawable.white)
+                        tabuleiro[pt.pontoC.linha][pt.pontoC.coluna]!!.setImageResource(R.drawable.white)
+                        tabuleiro[pt.pontoD.linha][pt.pontoD.coluna]!!.setImageResource(R.drawable.white)
                     }catch (e:ArrayIndexOutOfBoundsException ) {
                         //se a peça passou das bordas eu vou parar o jogo
                         running = false

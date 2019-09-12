@@ -16,5 +16,4 @@ class Ponto(var linha:Int, var coluna:Int){
     }
 
 
-
 }
