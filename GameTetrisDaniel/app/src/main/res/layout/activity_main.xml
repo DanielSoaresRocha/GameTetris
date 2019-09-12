@@ -5,4 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_launcher_background"
-    tools:context=".MainActivity" />
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/novoJogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/novo_jogo" />
+
+    <Button
+        android:id="@+id/continuar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="continuar" />
+
+    <Button
+        android:id="@+id/configurar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/configurar" />
+</LinearLayout>
