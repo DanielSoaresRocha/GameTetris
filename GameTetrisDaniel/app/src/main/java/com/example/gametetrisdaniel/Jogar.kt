@@ -80,8 +80,10 @@ class Jogar : AppCompatActivity() {
                     }
                     //move peça atual
 
-                    pt.moveDown()
-                    bateuPeca()
+                    if(!bateuPeca()){
+                        pt.moveDown()
+                    }
+
                     //print peça
                     try {
                         desenharPeca()
@@ -133,15 +135,18 @@ class Jogar : AppCompatActivity() {
         pt = L(2,17)
     }
 
-    fun bateuPeca(){
+    fun bateuPeca():Boolean{
             try {
-            if((board[pt.pontoA.linha][pt.pontoA.coluna] == 1) || (board[pt.pontoB.linha][pt.pontoB.coluna] == 1)//bateu no final da peca
-                || (board[pt.pontoC.linha][pt.pontoC.coluna] == 1) || (board[pt.pontoD.linha][pt.pontoD.coluna] == 1)){
-                bateuFinal()
+            if((board[pt.pontoA.linha+1][pt.pontoA.coluna] == 1) || (board[pt.pontoB.linha+1][pt.pontoB.coluna] == 1)//bateu no final da peca
+                || (board[pt.pontoC.linha+1][pt.pontoC.coluna] == 1) || (board[pt.pontoD.linha+1][pt.pontoD.coluna] == 1)){
+                //bateuFinal()
+                atualizar()
+                return true
             }
         }catch (e:ArrayIndexOutOfBoundsException){
             Log.i("ERRO","Erro não importante")
         }
+        return false
     }
 
     //bateu no final ou na lateral?
