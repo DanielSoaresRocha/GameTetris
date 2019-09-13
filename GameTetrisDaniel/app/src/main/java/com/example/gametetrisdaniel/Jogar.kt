@@ -60,6 +60,10 @@ class Jogar : AppCompatActivity() {
             pt.moveDown()
 
         }
+
+        rotateButton.setOnClickListener {
+            pt.moveRotate()
+        }
     }
     fun gameRun(){
         Thread{
@@ -75,6 +79,7 @@ class Jogar : AppCompatActivity() {
                         }
                     }
                     //move peça atual
+
                     pt.moveDown()
                     bateuPeca()
                     //print peça
@@ -133,7 +138,6 @@ class Jogar : AppCompatActivity() {
             if((board[pt.pontoA.linha][pt.pontoA.coluna] == 1) || (board[pt.pontoB.linha][pt.pontoB.coluna] == 1)//bateu no final da peca
                 || (board[pt.pontoC.linha][pt.pontoC.coluna] == 1) || (board[pt.pontoD.linha][pt.pontoD.coluna] == 1)){
                 bateuFinal()
-
             }
         }catch (e:ArrayIndexOutOfBoundsException){
             Log.i("ERRO","Erro não importante")

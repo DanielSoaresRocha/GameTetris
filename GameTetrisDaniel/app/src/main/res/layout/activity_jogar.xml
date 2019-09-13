@@ -34,6 +34,16 @@
         </Button>
 
         <Button
+
+            android:id="@+id/rotateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R"
+            android:textSize="30sp">
+
+        </Button>
+
+        <Button
             android:id="@+id/direitaBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,6 +51,7 @@
             android:textSize="30sp">
 
         </Button>
+
 
     </LinearLayout>
     <LinearLayout

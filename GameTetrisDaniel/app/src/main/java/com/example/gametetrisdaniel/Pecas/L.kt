@@ -3,7 +3,7 @@ package com.example.gametetrisdaniel.Pecas
 import com.example.gametetrisdaniel.Piece
 
 class L(linha:Int,coluna:Int) : Piece(linha, coluna) {
-    var anterior = "nenhum"
+    var estado = "normal"
     init {
         pontoB = Ponto(linha-1,coluna)
         pontoC = Ponto(linha-2,coluna)
@@ -16,7 +16,6 @@ class L(linha:Int,coluna:Int) : Piece(linha, coluna) {
         pontoC.moveDown()
         pontoD.moveDown()
 
-        anterior = "baixo"
     }
 
     override fun moveRight() {
@@ -25,7 +24,6 @@ class L(linha:Int,coluna:Int) : Piece(linha, coluna) {
         pontoC.moveRight()
         pontoD.moveRight()
 
-        anterior = "direita"
 
     }
 
@@ -35,7 +33,6 @@ class L(linha:Int,coluna:Int) : Piece(linha, coluna) {
         pontoC.moveLeft()
         pontoD.moveLeft()
 
-        anterior = "esquerda"
 
     }
 
@@ -46,9 +43,40 @@ class L(linha:Int,coluna:Int) : Piece(linha, coluna) {
         pontoD.moveTop()
     }
 
-
-
     override fun moveRotate() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        /*
+        pontoB.linha += 1
+        pontoB.coluna += 1
+
+        pontoC.linha += 2
+        pontoC.coluna += 2
+
+        pontoD.linha += 1
+        pontoD.coluna -= 1*/
+
+        if(estado.equals("normal")){
+            pontoB.linha = pontoA.linha
+            pontoB.coluna = pontoA.coluna+1
+
+            pontoC.linha = pontoA.linha
+            pontoC.coluna = pontoA.coluna+2
+
+            pontoD.linha = pontoA.linha+1
+            pontoD.coluna = pontoA.coluna
+
+            estado = "rotacionado"
+        }else{
+            pontoB.linha = pontoA.linha-1
+            pontoB.coluna = pontoA.coluna
+
+            pontoC.linha = pontoA.linha-2
+            pontoC.coluna = pontoA.coluna
+
+            pontoD.linha = pontoA.linha
+            pontoD.coluna = pontoA.coluna+1
+
+            estado = "normal"
+        }
+
     }
 }
