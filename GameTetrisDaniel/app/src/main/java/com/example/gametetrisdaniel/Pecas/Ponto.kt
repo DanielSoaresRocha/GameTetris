@@ -15,5 +15,8 @@ class Ponto(var linha:Int, var coluna:Int){
         coluna++
     }
 
+    fun moveTop(){
+        linha--
+    }
 
 }

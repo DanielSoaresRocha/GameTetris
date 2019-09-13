@@ -2,6 +2,7 @@ package com.example.gametetrisdaniel
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
 import com.example.gametetrisdaniel.Pecas.L
@@ -14,7 +15,7 @@ class Jogar : AppCompatActivity() {
     var running = true
     var speed : Long = 300
 
-    var pt = L(0,17)
+    var pt = L(2,17)
 
     var board = Array(LINHA) {
         Array(COLUNA){0}
@@ -43,15 +44,21 @@ class Jogar : AppCompatActivity() {
         gameRun()
 
         direitaBtn.setOnClickListener {
-            pt.moveRight()
+            if(!bateuDireita()){
+                pt.moveRight()
+            }
         }
 
         esquerdaBtn.setOnClickListener {
-            pt.moveLeft()
+            if(!bateuEsquerda()){
+                pt.moveLeft()
+            }
+
         }
 
         baixoBtn.setOnClickListener {
             pt.moveDown()
+
         }
     }
     fun gameRun(){
@@ -62,24 +69,123 @@ class Jogar : AppCompatActivity() {
                     //limpa tela
                     for (i in 0 until LINHA) {
                         for (j in 0 until COLUNA) {
-                            tabuleiro[i][j]!!.setImageResource(R.drawable.black)
+                            if (board[i][j] == 0){
+                                tabuleiro[i][j]!!.setImageResource(R.drawable.black)
+                            }
                         }
                     }
                     //move peça atual
                     pt.moveDown()
+                    bateuPeca()
                     //print peça
                     try {
-                        tabuleiro[pt.pontoA.linha][pt.pontoA.coluna]!!.setImageResource(R.drawable.white)
-                        tabuleiro[pt.pontoB.linha][pt.pontoB.coluna]!!.setImageResource(R.drawable.white)
-                        tabuleiro[pt.pontoC.linha][pt.pontoC.coluna]!!.setImageResource(R.drawable.white)
-                        tabuleiro[pt.pontoD.linha][pt.pontoD.coluna]!!.setImageResource(R.drawable.white)
+                        desenharPeca()
+                        //Log.i("OK","FEZ")
                     }catch (e:ArrayIndexOutOfBoundsException ) {
                         //se a peça passou das bordas eu vou parar o jogo
-                        running = false
+                        //running = false
+                        Log.i("ERRO","Deu erro"+ e.message)
+                        Log.i("INFORMACAO","PONTOA linha = "+ pt.pontoA.linha)
+                        Log.i("INFORMACAO","PONTOA linha = "+ pt.pontoA.coluna)
+
+                        Log.i("INFORMACAO","PONTOB linha = "+ pt.pontoB.linha)
+                        Log.i("INFORMACAO","PONTOB linha = "+ pt.pontoB.coluna)
+
+                        Log.i("INFORMACAO","PONTOC linha = "+ pt.pontoC.linha)
+                        Log.i("INFORMACAO","PONTOC linha = "+ pt.pontoC.coluna)
+
+                        Log.i("INFORMACAO","PONTOD linha = "+ pt.pontoD.linha)
+                        Log.i("INFORMACAO","PONTOD linha = "+ pt.pontoD.coluna)
+
+                        bordaOuLateral()
                     }
 
                 }
             }
         }.start()
+    }
+
+
+    fun atualizar(){
+        board[pt.pontoA.linha][pt.pontoA.coluna] =1
+        board[pt.pontoB.linha][pt.pontoB.coluna] =1
+        board[pt.pontoC.linha][pt.pontoC.coluna] =1
+        board[pt.pontoD.linha][pt.pontoD.coluna] =1
+
+        desenharPeca()
+        novaPeca()
+    }
+
+    fun desenharPeca(){
+        tabuleiro[pt.pontoA.linha][pt.pontoA.coluna]!!.setImageResource(R.drawable.white)
+        tabuleiro[pt.pontoB.linha][pt.pontoB.coluna]!!.setImageResource(R.drawable.white)
+        tabuleiro[pt.pontoC.linha][pt.pontoC.coluna]!!.setImageResource(R.drawable.white)
+        tabuleiro[pt.pontoD.linha][pt.pontoD.coluna]!!.setImageResource(R.drawable.white)
+
+    }
+
+    fun novaPeca(){
+        pt = L(2,17)
+    }
+
+    fun bateuPeca(){
+            try {
+            if((board[pt.pontoA.linha][pt.pontoA.coluna] == 1) || (board[pt.pontoB.linha][pt.pontoB.coluna] == 1)//bateu no final da peca
+                || (board[pt.pontoC.linha][pt.pontoC.coluna] == 1) || (board[pt.pontoD.linha][pt.pontoD.coluna] == 1)){
+                bateuFinal()
+
+            }
+        }catch (e:ArrayIndexOutOfBoundsException){
+            Log.i("ERRO","Erro não importante")
+        }
+    }
+
+    //bateu no final ou na lateral?
+    fun bordaOuLateral(){
+        if(pt.pontoA.linha >= LINHA || pt.pontoB.linha >= LINHA || pt.pontoC.linha >= LINHA ||
+            pt.pontoD.linha >= LINHA){
+            bateuFinal()
+        }else{
+            bateuLateral()
+        }
+    }
+
+    fun bateuFinal(){
+        pt.moveTop()
+        atualizar()
+    }
+
+    //ver se bateu na direita ou esquerda
+    fun bateuLateral(){
+        if(pt.pontoA.coluna >= COLUNA || pt.pontoB.coluna >= COLUNA || pt.pontoC.coluna >= COLUNA ||
+            pt.pontoD.coluna >= COLUNA){
+            pt.moveLeft()
+        }else{
+            pt.moveRight()
+        }
+    }
+
+    fun bateuDireita():Boolean{
+        try {
+            if((board[pt.pontoA.linha][pt.pontoA.coluna+1] == 1) || (board[pt.pontoB.linha][pt.pontoB.coluna+1] == 1)
+                || (board[pt.pontoC.linha][pt.pontoC.coluna+1] == 1) || (board[pt.pontoD.linha][pt.pontoD.coluna+1] == 1)) {//bateu no lado direito
+                return true
+                }
+        }catch (e:ArrayIndexOutOfBoundsException){
+            Log.i("ERRO","Erro não importante")
+        }
+        return false
+    }
+
+    fun bateuEsquerda():Boolean{
+        try {
+            if((board[pt.pontoA.linha][pt.pontoA.coluna-1] == 1) || (board[pt.pontoB.linha][pt.pontoB.coluna-1] == 1)
+                || (board[pt.pontoC.linha][pt.pontoC.coluna-1] == 1) || (board[pt.pontoD.linha][pt.pontoD.coluna-1] == 1)) {//bateu no lado esquerdo
+                return true
+            }
+        }catch (e:ArrayIndexOutOfBoundsException){
+            Log.i("ERRO","Erro não importante")
+        }
+        return false
     }
 }
