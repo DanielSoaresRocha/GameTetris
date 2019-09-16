@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
+import com.example.gametetrisdaniel.Pecas.I
 import com.example.gametetrisdaniel.Pecas.L
 import com.example.gametetrisdaniel.Pecas.Ponto
+import com.example.gametetrisdaniel.Pecas.Z
 import kotlinx.android.synthetic.main.activity_jogar.*
 
 class Jogar : AppCompatActivity() {
@@ -15,7 +17,7 @@ class Jogar : AppCompatActivity() {
     var running = true
     var speed : Long = 300
 
-    var pt = L(2,17)
+    var pt = Z(3,17)
 
     var board = Array(LINHA) {
         Array(COLUNA){0}
@@ -132,7 +134,7 @@ class Jogar : AppCompatActivity() {
     }
 
     fun novaPeca(){
-        pt = L(2,17)
+        pt = Z(3,17)
     }
 
     fun bateuPeca():Boolean{
