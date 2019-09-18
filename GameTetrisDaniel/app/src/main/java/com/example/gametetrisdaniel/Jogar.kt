@@ -157,11 +157,29 @@ class Jogar : AppCompatActivity() {
                 }else{
                     break
                 }
+
                 if(pont == COLUNA){
                     Log.i("ACERTOU","ACEEERTOUUU MISERAVI")
                     var pontuacaoAtual : Int = Integer.parseInt(pontuacao.text.toString())
                     pontuacaoAtual += 100
                     pontuacao.setText(Integer.toString(pontuacaoAtual))
+
+                    acertouTabuleiro(i)
+                }
+            }
+        }
+    }
+
+    fun acertouTabuleiro(linha : Int){
+        for(coluna in 0..COLUNA-1){
+            board[linha][coluna] = 0
+        }
+
+        for(linha in 0..LINHA-1){
+            for(coluna in 0..COLUNA-1){
+                if(board[linha][coluna] == 1){
+                    board[linha][coluna] = 0
+                    board[linha+1][coluna] = 1
                 }
             }
         }
