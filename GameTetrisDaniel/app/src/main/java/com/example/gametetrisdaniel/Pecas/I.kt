@@ -32,7 +32,7 @@ class I(linha:Int,coluna:Int) : Piece(linha, coluna){
         pontoD.moveDown()
     }
 
-    fun moveTop(){
+    override fun moveTop(){
         pontoA.moveTop()
         pontoB.moveTop()
         pontoC.moveTop()

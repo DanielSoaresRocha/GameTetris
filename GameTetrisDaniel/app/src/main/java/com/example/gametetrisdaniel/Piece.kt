@@ -13,5 +13,7 @@ abstract class Piece(var linha:Int,var coluna:Int){
     abstract fun moveLeft()
     abstract fun moveRight()
     abstract fun moveRotate()
+    abstract fun moveTop()
+
 
 }

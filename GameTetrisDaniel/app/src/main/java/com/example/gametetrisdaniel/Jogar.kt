@@ -5,11 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
-import com.example.gametetrisdaniel.Pecas.I
-import com.example.gametetrisdaniel.Pecas.L
-import com.example.gametetrisdaniel.Pecas.Ponto
-import com.example.gametetrisdaniel.Pecas.Z
+import com.example.gametetrisdaniel.Pecas.*
 import kotlinx.android.synthetic.main.activity_jogar.*
+import java.util.*
+import kotlin.random.Random
 
 class Jogar : AppCompatActivity() {
     val LINHA = 36
@@ -17,7 +16,8 @@ class Jogar : AppCompatActivity() {
     var running = true
     var speed : Long = 300
 
-    var pt = Z(3,17)
+    var pt : Piece = Quadrado(3,17)
+    var random = Random
 
     var board = Array(LINHA) {
         Array(COLUNA){0}
@@ -46,21 +46,24 @@ class Jogar : AppCompatActivity() {
         gameRun()
 
         direitaBtn.setOnClickListener {
-            if(!bateuDireita()){
-                pt.moveRight()
+            if(!bateuDireitaBorda()){
+                if(!bateuDireitaPeca()){
+                    pt.moveRight()
+                }
             }
         }
 
         esquerdaBtn.setOnClickListener {
-            if(!bateuEsquerda()){
-                pt.moveLeft()
+            if(!bateuEsquerdaBorda()){
+                if(!bateuEsquerdaPeca()){
+                    pt.moveLeft()
+                }
             }
 
         }
 
         baixoBtn.setOnClickListener {
-            pt.moveDown()
-
+            moverBaixo()
         }
 
         rotateButton.setOnClickListener {
@@ -82,9 +85,7 @@ class Jogar : AppCompatActivity() {
                     }
                     //move peça atual
 
-                    if(!bateuPeca()){
-                        pt.moveDown()
-                    }
+                    moverBaixo()
 
                     //print peça
                     try {
@@ -106,7 +107,7 @@ class Jogar : AppCompatActivity() {
                         Log.i("INFORMACAO","PONTOD linha = "+ pt.pontoD.linha)
                         Log.i("INFORMACAO","PONTOD linha = "+ pt.pontoD.coluna)
 
-                        bordaOuLateral()
+                        //bateuLateral()
                     }
 
                 }
@@ -114,6 +115,17 @@ class Jogar : AppCompatActivity() {
         }.start()
     }
 
+
+    fun moverBaixo(){
+        if(!bateuFinal()){
+            if(!bateuPeca()){
+                pt.moveDown()
+            }
+        }else{
+            atualizar()
+        }
+
+    }
 
     fun atualizar(){
         board[pt.pontoA.linha][pt.pontoA.coluna] =1
@@ -134,7 +146,19 @@ class Jogar : AppCompatActivity() {
     }
 
     fun novaPeca(){
-        pt = Z(3,17)
+        var peca = random.nextInt(4)
+        if(peca == 0){
+            pt = L(3,17)
+        }else if(peca == 1){
+            pt = I(3,17)
+        }else if(peca == 2){
+            pt = Z(3,17)
+        }else if(peca == 4){
+            pt = Quadrado(3,17)
+        }else{
+            pt = T(3,17)
+        }
+
     }
 
     fun bateuPeca():Boolean{
@@ -151,32 +175,26 @@ class Jogar : AppCompatActivity() {
         return false
     }
 
-    //bateu no final ou na lateral?
-    fun bordaOuLateral(){
+
+    fun bateuFinal() : Boolean{
         if(pt.pontoA.linha >= LINHA || pt.pontoB.linha >= LINHA || pt.pontoC.linha >= LINHA ||
             pt.pontoD.linha >= LINHA){
-            bateuFinal()
-        }else{
-            bateuLateral()
+            pt.moveTop()
+            return true
         }
+        return false
     }
 
-    fun bateuFinal(){
-        pt.moveTop()
-        atualizar()
-    }
 
-    //ver se bateu na direita ou esquerda
-    fun bateuLateral(){
-        if(pt.pontoA.coluna >= COLUNA || pt.pontoB.coluna >= COLUNA || pt.pontoC.coluna >= COLUNA ||
-            pt.pontoD.coluna >= COLUNA){
-            pt.moveLeft()
-        }else{
-            pt.moveRight()
+    fun bateuDireitaBorda() : Boolean{
+        if(pt.pontoA.coluna+1 >= COLUNA || pt.pontoB.coluna+1 >= COLUNA || pt.pontoC.coluna+1 >= COLUNA ||
+                pt.pontoD.coluna+1 >= COLUNA){
+            return true
         }
+        return false
     }
 
-    fun bateuDireita():Boolean{
+    fun bateuDireitaPeca():Boolean{
         try {
             if((board[pt.pontoA.linha][pt.pontoA.coluna+1] == 1) || (board[pt.pontoB.linha][pt.pontoB.coluna+1] == 1)
                 || (board[pt.pontoC.linha][pt.pontoC.coluna+1] == 1) || (board[pt.pontoD.linha][pt.pontoD.coluna+1] == 1)) {//bateu no lado direito
@@ -188,7 +206,7 @@ class Jogar : AppCompatActivity() {
         return false
     }
 
-    fun bateuEsquerda():Boolean{
+    fun bateuEsquerdaPeca():Boolean{
         try {
             if((board[pt.pontoA.linha][pt.pontoA.coluna-1] == 1) || (board[pt.pontoB.linha][pt.pontoB.coluna-1] == 1)
                 || (board[pt.pontoC.linha][pt.pontoC.coluna-1] == 1) || (board[pt.pontoD.linha][pt.pontoD.coluna-1] == 1)) {//bateu no lado esquerdo
@@ -196,6 +214,14 @@ class Jogar : AppCompatActivity() {
             }
         }catch (e:ArrayIndexOutOfBoundsException){
             Log.i("ERRO","Erro não importante")
+        }
+        return false
+    }
+
+    fun bateuEsquerdaBorda(): Boolean{
+        if(pt.pontoA.coluna-1 < 0 || pt.pontoB.coluna-1 < 0 || pt.pontoC.coluna-1 < 0 ||
+            pt.pontoD.coluna-1 < 0){
+            return true
         }
         return false
     }
