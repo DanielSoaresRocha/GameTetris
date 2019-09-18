@@ -14,7 +14,7 @@ class Jogar : AppCompatActivity() {
     val LINHA = 36
     val COLUNA = 26
     var running = true
-    var speed : Long = 100
+    var speed : Long = 300
 
     var pt : Piece = Quadrado(3,17)
     var random = Random
@@ -45,7 +45,7 @@ class Jogar : AppCompatActivity() {
 
         gameRun()
 
-        verificaPontos()
+        //verificaPontos()
 
         direitaBtn.setOnClickListener {
             if(!bateuDireitaBorda()){
@@ -96,7 +96,7 @@ class Jogar : AppCompatActivity() {
                     }catch (e:ArrayIndexOutOfBoundsException ) {
                         //se a peça passou das bordas eu vou parar o jogo
                         //running = false
-                        Log.i("ERRO","Deu erro"+ e.message)
+                        /*Log.i("ERRO","Deu erro"+ e.message)
                         Log.i("INFORMACAO","PONTOA linha = "+ pt.pontoA.linha)
                         Log.i("INFORMACAO","PONTOA linha = "+ pt.pontoA.coluna)
 
@@ -107,7 +107,7 @@ class Jogar : AppCompatActivity() {
                         Log.i("INFORMACAO","PONTOC linha = "+ pt.pontoC.coluna)
 
                         Log.i("INFORMACAO","PONTOD linha = "+ pt.pontoD.linha)
-                        Log.i("INFORMACAO","PONTOD linha = "+ pt.pontoD.coluna)
+                        Log.i("INFORMACAO","PONTOD linha = "+ pt.pontoD.coluna)*/
 
                         //bateuLateral()
                     }
@@ -175,6 +175,18 @@ class Jogar : AppCompatActivity() {
             board[linha][coluna] = 0
         }
 
+        for(linhaa in LINHA-1 downTo 0){
+            println("linha = "+ linha)
+            for(coluna in 0..COLUNA-1){
+                if(board[linhaa][coluna] == 1){
+                    println("Encontrou")
+                    board[linhaa][coluna] = 0
+                    board[linhaa+1][coluna] = 1
+                    println("LINHAA === " + linhaa)
+                }
+            }
+        }
+        /*
         for(linha in 0..LINHA-1){
             for(coluna in 0..COLUNA-1){
                 if(board[linha][coluna] == 1){
@@ -182,11 +194,12 @@ class Jogar : AppCompatActivity() {
                     board[linha+1][coluna] = 1
                 }
             }
-        }
+        }*/
     }
 
     fun novaPeca(){
         var peca = random.nextInt(4)
+
         if(peca == 0){
             pt = L(3,17)
         }else if(peca == 1){
@@ -198,7 +211,6 @@ class Jogar : AppCompatActivity() {
         }else{
             pt = T(3,17)
         }
-
     }
 
     fun bateuPeca():Boolean{
@@ -210,7 +222,7 @@ class Jogar : AppCompatActivity() {
                 return true
             }
         }catch (e:ArrayIndexOutOfBoundsException){
-            Log.i("ERRO","Erro não importante")
+            //Log.i("ERRO","Erro não importante")
         }
         return false
     }
@@ -241,7 +253,7 @@ class Jogar : AppCompatActivity() {
                 return true
                 }
         }catch (e:ArrayIndexOutOfBoundsException){
-            Log.i("ERRO","Erro não importante")
+            //Log.i("ERRO","Erro não importante")
         }
         return false
     }
@@ -253,7 +265,7 @@ class Jogar : AppCompatActivity() {
                 return true
             }
         }catch (e:ArrayIndexOutOfBoundsException){
-            Log.i("ERRO","Erro não importante")
+            //Log.i("ERRO","Erro não importante")
         }
         return false
     }
