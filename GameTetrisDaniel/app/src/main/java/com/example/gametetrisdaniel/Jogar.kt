@@ -14,7 +14,7 @@ class Jogar : AppCompatActivity() {
     val LINHA = 36
     val COLUNA = 26
     var running = true
-    var speed : Long = 300
+    var speed : Long = 100
 
     var pt : Piece = Quadrado(3,17)
     var random = Random
@@ -44,6 +44,8 @@ class Jogar : AppCompatActivity() {
         }
 
         gameRun()
+
+        verificaPontos()
 
         direitaBtn.setOnClickListener {
             if(!bateuDireitaBorda()){
@@ -134,6 +136,7 @@ class Jogar : AppCompatActivity() {
         board[pt.pontoD.linha][pt.pontoD.coluna] =1
 
         desenharPeca()
+        verificaPontos()
         novaPeca()
     }
 
@@ -143,6 +146,25 @@ class Jogar : AppCompatActivity() {
         tabuleiro[pt.pontoC.linha][pt.pontoC.coluna]!!.setImageResource(R.drawable.white)
         tabuleiro[pt.pontoD.linha][pt.pontoD.coluna]!!.setImageResource(R.drawable.white)
 
+    }
+
+    fun verificaPontos(){
+        for (i in 0..LINHA-1) {
+            var pont = 0
+            for(j in 0..COLUNA-1){
+                if(board[i][j] == 1){
+                    pont++
+                }else{
+                    break
+                }
+                if(pont == COLUNA){
+                    Log.i("ACERTOU","ACEEERTOUUU MISERAVI")
+                    var pontuacaoAtual : Int = Integer.parseInt(pontuacao.text.toString())
+                    pontuacaoAtual += 100
+                    pontuacao.setText(Integer.toString(pontuacaoAtual))
+                }
+            }
+        }
     }
 
     fun novaPeca(){
