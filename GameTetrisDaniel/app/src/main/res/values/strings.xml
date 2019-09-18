@@ -3,4 +3,5 @@
     <string name="novo_jogo">Novo Jogo</string>
     <string name="configurar">configurar</string>
     <string name="pontuacao">Pontuação:  </string>
+    <string name="selecione_a_dificuldade">Selecione a dificuldade:</string>
 </resources>

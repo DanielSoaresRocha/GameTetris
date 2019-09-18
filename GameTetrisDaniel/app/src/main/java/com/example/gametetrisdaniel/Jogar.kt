@@ -14,7 +14,7 @@ class Jogar : AppCompatActivity() {
     val LINHA = 36
     val COLUNA = 26
     var running = true
-    var speed : Long = 300
+    var speed : Long = 200
 
     var pt : Piece = Quadrado(3,17)
     var random = Random
@@ -135,8 +135,8 @@ class Jogar : AppCompatActivity() {
         board[pt.pontoC.linha][pt.pontoC.coluna] =1
         board[pt.pontoD.linha][pt.pontoD.coluna] =1
 
-        desenharPeca()
         verificaPontos()
+        desenharPeca()
         novaPeca()
     }
 
@@ -175,26 +175,15 @@ class Jogar : AppCompatActivity() {
             board[linha][coluna] = 0
         }
 
-        for(linhaa in LINHA-1 downTo 0){
-            println("linha = "+ linha)
-            for(coluna in 0..COLUNA-1){
+        for(linhaa in linha-1 downTo 0){
+            for(coluna in COLUNA-1 downTo 0){
+                println("Linha = "+ linhaa+ "coluna = "+ coluna)
                 if(board[linhaa][coluna] == 1){
-                    println("Encontrou")
                     board[linhaa][coluna] = 0
                     board[linhaa+1][coluna] = 1
-                    println("LINHAA === " + linhaa)
                 }
             }
         }
-        /*
-        for(linha in 0..LINHA-1){
-            for(coluna in 0..COLUNA-1){
-                if(board[linha][coluna] == 1){
-                    board[linha][coluna] = 0
-                    board[linha+1][coluna] = 1
-                }
-            }
-        }*/
     }
 
     fun novaPeca(){
