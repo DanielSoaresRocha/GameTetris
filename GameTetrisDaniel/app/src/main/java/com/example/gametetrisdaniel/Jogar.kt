@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
+import androidx.lifecycle.ViewModelProviders
 import com.example.gametetrisdaniel.Pecas.*
 import kotlinx.android.synthetic.main.activity_jogar.*
 import java.util.*
@@ -22,13 +23,17 @@ class Jogar : AppCompatActivity() {
 
     var pt : Piece = I(3,COLUNA/2)
     var random = Random
-
+    /*
     var board = Array(LINHA) {
         Array(COLUNA){0}
-    }
+    }*/
 
     var tabuleiro = Array(LINHA){
         arrayOfNulls<ImageView>(COLUNA)
+    }
+
+    val vm: BoardViewModel by lazy {
+        ViewModelProviders.of(this)[BoardViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,7 +102,7 @@ class Jogar : AppCompatActivity() {
                     //limpa tela
                     for (i in 0 until LINHA) {
                         for (j in 0 until COLUNA) {
-                            if (board[i][j] == 0){
+                            if (vm.board[i][j] == 0){
                                 tabuleiro[i][j]!!.setImageResource(R.drawable.black)
                             }
                         }
@@ -147,10 +152,10 @@ class Jogar : AppCompatActivity() {
     }
 
     fun atualizar(){
-        board[pt.pontoA.linha][pt.pontoA.coluna] =1
-        board[pt.pontoB.linha][pt.pontoB.coluna] =1
-        board[pt.pontoC.linha][pt.pontoC.coluna] =1
-        board[pt.pontoD.linha][pt.pontoD.coluna] =1
+        vm.board[pt.pontoA.linha][pt.pontoA.coluna] =1
+        vm.board[pt.pontoB.linha][pt.pontoB.coluna] =1
+        vm.board[pt.pontoC.linha][pt.pontoC.coluna] =1
+        vm.board[pt.pontoD.linha][pt.pontoD.coluna] =1
 
         verificaPontos()
         desenharPeca()
@@ -169,7 +174,7 @@ class Jogar : AppCompatActivity() {
         for (i in 0..LINHA-1) {
             var pont = 0
             for(j in 0..COLUNA-1){
-                if(board[i][j] == 1){
+                if(vm.board[i][j] == 1){
                     pont++
                 }else{
                     break
@@ -189,15 +194,15 @@ class Jogar : AppCompatActivity() {
 
     fun acertouTabuleiro(linha : Int){
         for(coluna in 0..COLUNA-1){
-            board[linha][coluna] = 0
+            vm.board[linha][coluna] = 0
         }
 
         for(linhaa in linha-1 downTo 0){
             for(coluna in COLUNA-1 downTo 0){
                 println("Linha = "+ linhaa+ "coluna = "+ coluna)
-                if(board[linhaa][coluna] == 1){
-                    board[linhaa][coluna] = 0
-                    board[linhaa+1][coluna] = 1
+                if(vm.board[linhaa][coluna] == 1){
+                    vm.board[linhaa][coluna] = 0
+                    vm.board[linhaa+1][coluna] = 1
                 }
             }
         }
@@ -227,8 +232,8 @@ class Jogar : AppCompatActivity() {
 
     fun bateuPeca():Boolean{
             try {
-            if((board[pt.pontoA.linha+1][pt.pontoA.coluna] == 1) || (board[pt.pontoB.linha+1][pt.pontoB.coluna] == 1)//bateu no final da peca
-                || (board[pt.pontoC.linha+1][pt.pontoC.coluna] == 1) || (board[pt.pontoD.linha+1][pt.pontoD.coluna] == 1)){
+            if((vm.board[pt.pontoA.linha+1][pt.pontoA.coluna] == 1) || (vm.board[pt.pontoB.linha+1][pt.pontoB.coluna] == 1)//bateu no final da peca
+                || (vm.board[pt.pontoC.linha+1][pt.pontoC.coluna] == 1) || (vm.board[pt.pontoD.linha+1][pt.pontoD.coluna] == 1)){
                 //bateuFinal()
                 atualizar()
                 return true
@@ -268,8 +273,8 @@ class Jogar : AppCompatActivity() {
 
     fun bateuDireitaPeca():Boolean{
         try {
-            if((board[pt.pontoA.linha][pt.pontoA.coluna+1] == 1) || (board[pt.pontoB.linha][pt.pontoB.coluna+1] == 1)
-                || (board[pt.pontoC.linha][pt.pontoC.coluna+1] == 1) || (board[pt.pontoD.linha][pt.pontoD.coluna+1] == 1)) {//bateu no lado direito
+            if((vm.board[pt.pontoA.linha][pt.pontoA.coluna+1] == 1) || (vm.board[pt.pontoB.linha][pt.pontoB.coluna+1] == 1)
+                || (vm.board[pt.pontoC.linha][pt.pontoC.coluna+1] == 1) || (vm.board[pt.pontoD.linha][pt.pontoD.coluna+1] == 1)) {//bateu no lado direito
                 return true
                 }
         }catch (e:ArrayIndexOutOfBoundsException){
@@ -280,8 +285,8 @@ class Jogar : AppCompatActivity() {
 
     fun bateuEsquerdaPeca():Boolean{
         try {
-            if((board[pt.pontoA.linha][pt.pontoA.coluna-1] == 1) || (board[pt.pontoB.linha][pt.pontoB.coluna-1] == 1)
-                || (board[pt.pontoC.linha][pt.pontoC.coluna-1] == 1) || (board[pt.pontoD.linha][pt.pontoD.coluna-1] == 1)) {//bateu no lado esquerdo
+            if((vm.board[pt.pontoA.linha][pt.pontoA.coluna-1] == 1) || (vm.board[pt.pontoB.linha][pt.pontoB.coluna-1] == 1)
+                || (vm.board[pt.pontoC.linha][pt.pontoC.coluna-1] == 1) || (vm.board[pt.pontoD.linha][pt.pontoD.coluna-1] == 1)) {//bateu no lado esquerdo
                 return true
             }
         }catch (e:ArrayIndexOutOfBoundsException){
@@ -291,8 +296,8 @@ class Jogar : AppCompatActivity() {
     }
 
     fun colisionRotatePiece(){
-        if(board[pt.pontoA.linha][pt.pontoA.coluna] == 1 || board[pt.pontoB.linha][pt.pontoB.coluna] == 1
-            || board[pt.pontoC.linha][pt.pontoC.coluna] == 1 || board[pt.pontoD.linha][pt.pontoD.coluna] == 1){
+        if(vm.board[pt.pontoA.linha][pt.pontoA.coluna] == 1 || vm.board[pt.pontoB.linha][pt.pontoB.coluna] == 1
+            || vm.board[pt.pontoC.linha][pt.pontoC.coluna] == 1 || vm.board[pt.pontoD.linha][pt.pontoD.coluna] == 1){
             pt.moveRotate(COLUNA)
         }
     }
@@ -304,7 +309,7 @@ class Jogar : AppCompatActivity() {
 
     fun verificaDerrota(){
         for(coluna in 0 until COLUNA){
-            if(board[3][coluna] == 1){
+            if(vm.board[3][coluna] == 1){
                 running = false
 
                 var i = Intent(this,GameOver::class.java)
@@ -318,6 +323,17 @@ class Jogar : AppCompatActivity() {
 
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        running = false
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        running = true
+        gameRun()
     }
 
 }
