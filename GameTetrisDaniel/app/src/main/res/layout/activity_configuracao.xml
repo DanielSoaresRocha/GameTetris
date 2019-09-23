@@ -41,6 +41,7 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/facilBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="10sp"
@@ -51,6 +52,7 @@
             </RadioButton>
 
             <RadioButton
+                android:id="@+id/medioBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="10sp"
@@ -61,6 +63,7 @@
             </RadioButton>
 
             <RadioButton
+                android:id="@+id/dificilBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="10sp"
@@ -71,6 +74,33 @@
             </RadioButton>
 
         </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingVertical="30sp"
+        >
+
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cancelar">
+
+
+        </Button>
+
+        <Button
+            android:id="@+id/salvarBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="salvar">
+
+
+        </Button>
 
     </LinearLayout>
 

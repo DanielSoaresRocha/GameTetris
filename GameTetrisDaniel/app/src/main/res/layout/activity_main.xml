@@ -22,7 +22,7 @@
         android:text="continuar" />
 
     <Button
-        android:id="@+id/configurar"
+        android:id="@+id/configurarBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/configurar" />

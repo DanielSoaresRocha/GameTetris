@@ -1,9 +1,12 @@
 package com.example.gametetrisdaniel.Pecas
 
 import com.example.gametetrisdaniel.Piece
+import com.example.gametetrisdaniel.R
 
 class L(linha:Int,coluna:Int) : Piece(linha, coluna) {
+
     var estado = "normal"
+    val color : Int = R.drawable.blue
 
     init {
         pontoB = Ponto(linha-1,coluna)
@@ -79,5 +82,8 @@ class L(linha:Int,coluna:Int) : Piece(linha, coluna) {
             estado = "normal"
         }
 
+    }
+    override fun getColorPiece(): Int {
+        return color
     }
 }

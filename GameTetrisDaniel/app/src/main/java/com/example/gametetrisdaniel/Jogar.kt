@@ -1,5 +1,6 @@
 package com.example.gametetrisdaniel
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,12 +12,14 @@ import java.util.*
 import kotlin.random.Random
 
 class Jogar : AppCompatActivity() {
-    val LINHA = 36
-    val COLUNA = 26
+    val LINHA = 20
+    val COLUNA = 10
     var running = true
     var speed : Long = 200
 
-    var pt : Piece = Quadrado(3,17)
+    val PREFS = "speed_file"
+
+    var pt : Piece = I(3,COLUNA/2)
     var random = Random
 
     var board = Array(LINHA) {
@@ -30,6 +33,8 @@ class Jogar : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jogar)
+
+        pegarVelocidade()
 
         gridboard.rowCount = LINHA
         gridboard.columnCount = COLUNA
@@ -70,6 +75,7 @@ class Jogar : AppCompatActivity() {
 
         rotateButton.setOnClickListener {
             pt.moveRotate()
+
         }
     }
     fun gameRun(){
@@ -141,10 +147,10 @@ class Jogar : AppCompatActivity() {
     }
 
     fun desenharPeca(){
-        tabuleiro[pt.pontoA.linha][pt.pontoA.coluna]!!.setImageResource(R.drawable.white)
-        tabuleiro[pt.pontoB.linha][pt.pontoB.coluna]!!.setImageResource(R.drawable.white)
-        tabuleiro[pt.pontoC.linha][pt.pontoC.coluna]!!.setImageResource(R.drawable.white)
-        tabuleiro[pt.pontoD.linha][pt.pontoD.coluna]!!.setImageResource(R.drawable.white)
+        tabuleiro[pt.pontoA.linha][pt.pontoA.coluna]!!.setImageResource(pt.getColorPiece())
+        tabuleiro[pt.pontoB.linha][pt.pontoB.coluna]!!.setImageResource(pt.getColorPiece())
+        tabuleiro[pt.pontoC.linha][pt.pontoC.coluna]!!.setImageResource(pt.getColorPiece())
+        tabuleiro[pt.pontoD.linha][pt.pontoD.coluna]!!.setImageResource(pt.getColorPiece())
 
     }
 
@@ -187,19 +193,21 @@ class Jogar : AppCompatActivity() {
     }
 
     fun novaPeca(){
-        var peca = random.nextInt(4)
+        var peca = random.nextInt(5)
 
         if(peca == 0){
-            pt = L(3,17)
+            pt = L(3,COLUNA/2)
         }else if(peca == 1){
-            pt = I(3,17)
+            pt = I(3,COLUNA/2)
         }else if(peca == 2){
-            pt = Z(3,17)
+            pt = Z(3,COLUNA/2)
         }else if(peca == 4){
-            pt = Quadrado(3,17)
+            pt = Quadrado(3,COLUNA/2)
         }else{
-            pt = T(3,17)
+            pt = T(3,COLUNA/2)
         }
+
+
     }
 
     fun bateuPeca():Boolean{
@@ -218,9 +226,9 @@ class Jogar : AppCompatActivity() {
 
 
     fun bateuFinal() : Boolean{
-        if(pt.pontoA.linha >= LINHA || pt.pontoB.linha >= LINHA || pt.pontoC.linha >= LINHA ||
-            pt.pontoD.linha >= LINHA){
-            pt.moveTop()
+        if(pt.pontoA.linha+1 >= LINHA || pt.pontoB.linha+1 >= LINHA || pt.pontoC.linha+1 >= LINHA ||
+            pt.pontoD.linha+1 >= LINHA){
+            //pt.moveTop()
             return true
         }
         return false
@@ -230,6 +238,14 @@ class Jogar : AppCompatActivity() {
     fun bateuDireitaBorda() : Boolean{
         if(pt.pontoA.coluna+1 >= COLUNA || pt.pontoB.coluna+1 >= COLUNA || pt.pontoC.coluna+1 >= COLUNA ||
                 pt.pontoD.coluna+1 >= COLUNA){
+            return true
+        }
+        return false
+    }
+
+    fun bateuEsquerdaBorda(): Boolean{
+        if(pt.pontoA.coluna-1 < 0 || pt.pontoB.coluna-1 < 0 || pt.pontoC.coluna-1 < 0 ||
+            pt.pontoD.coluna-1 < 0){
             return true
         }
         return false
@@ -259,11 +275,10 @@ class Jogar : AppCompatActivity() {
         return false
     }
 
-    fun bateuEsquerdaBorda(): Boolean{
-        if(pt.pontoA.coluna-1 < 0 || pt.pontoB.coluna-1 < 0 || pt.pontoC.coluna-1 < 0 ||
-            pt.pontoD.coluna-1 < 0){
-            return true
-        }
-        return false
+    fun pegarVelocidade(){
+        val settings = getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+
+        speed = settings.getLong("speed",200)
     }
+
 }

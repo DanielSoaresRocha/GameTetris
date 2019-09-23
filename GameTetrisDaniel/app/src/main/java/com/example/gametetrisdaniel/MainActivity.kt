@@ -15,5 +15,11 @@ class MainActivity : AppCompatActivity() {
             var i = Intent(this,Jogar::class.java)
             startActivity(i)
         }
+
+        configurarBtn.setOnClickListener {
+            var configurar = Intent(this,Configuracao::class.java)
+            startActivity(configurar)
+        }
+
     }
 }

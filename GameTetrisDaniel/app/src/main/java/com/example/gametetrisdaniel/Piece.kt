@@ -14,6 +14,7 @@ abstract class Piece(var linha:Int,var coluna:Int){
     abstract fun moveRight()
     abstract fun moveRotate()
     abstract fun moveTop()
+    abstract fun getColorPiece():Int
 
 
 }

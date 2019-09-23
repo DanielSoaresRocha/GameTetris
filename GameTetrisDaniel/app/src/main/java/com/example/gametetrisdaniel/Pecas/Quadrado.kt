@@ -2,9 +2,12 @@ package com.example.gametetrisdaniel.Pecas
 
 
 import com.example.gametetrisdaniel.Piece
+import com.example.gametetrisdaniel.R
 
 class Quadrado(linha:Int,coluna:Int) : Piece(linha, coluna) {
+
     var estado = "normal"
+    val color : Int = R.drawable.green
 
     init {
         pontoB = Ponto(linha-1, coluna)
@@ -47,5 +50,9 @@ class Quadrado(linha:Int,coluna:Int) : Piece(linha, coluna) {
 
     override fun moveRotate() {
 
+    }
+
+    override fun getColorPiece(): Int {
+        return color
     }
 }

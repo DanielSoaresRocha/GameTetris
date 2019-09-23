@@ -1,10 +1,14 @@
 package com.example.gametetrisdaniel.Pecas
 
+import com.example.gametetrisdaniel.Jogar
 import com.example.gametetrisdaniel.Piece
+import com.example.gametetrisdaniel.R
 
 class I(linha:Int,coluna:Int) : Piece(linha, coluna){
 
     var estado : String = "normal"
+    val color : Int = R.drawable.pink
+
     init {
         pontoB = Ponto(linha-1,coluna)
         pontoC = Ponto(linha-2,coluna)
@@ -53,16 +57,24 @@ class I(linha:Int,coluna:Int) : Piece(linha, coluna){
 
             estado = "rotacionado"
         }else{
-            pontoB.linha = pontoA.linha-1
-            pontoB.coluna = pontoA.coluna
-
-            pontoC.linha = pontoA.linha-2
-            pontoC.coluna = pontoA.coluna
-
-            pontoD.linha = pontoA.linha-3
-            pontoD.coluna = pontoA.coluna
-
-            estado = "normal"
+            inverter()
         }
+    }
+
+    fun inverter(){
+        pontoB.linha = pontoA.linha-1
+        pontoB.coluna = pontoA.coluna
+
+        pontoC.linha = pontoA.linha-2
+        pontoC.coluna = pontoA.coluna
+
+        pontoD.linha = pontoA.linha-3
+        pontoD.coluna = pontoA.coluna
+
+        estado = "normal"
+    }
+
+    override fun getColorPiece():Int{
+        return color
     }
 }
