@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="vermelhoo">#850016</color>
-    <color name="verde">#043A03</color>
+    <color name="verde">#03FF00</color>
+    <color name="branco">#FFFFFF</color>
+
 </resources>

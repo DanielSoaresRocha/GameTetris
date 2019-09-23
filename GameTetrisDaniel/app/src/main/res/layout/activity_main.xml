@@ -4,26 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_launcher_background"
+    android:background="@drawable/black"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/novoJogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/novo_jogo" />
 
-    <Button
-        android:id="@+id/continuar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="continuar" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@drawable/game_tetris"
+        android:layout_weight="0.1"
+        >
 
-    <Button
-        android:id="@+id/configurarBtn"
-        android:layout_width="wrap_content"
+    </ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/configurar" />
+        android:orientation="vertical"
+        android:layout_weight="0.7"
+        android:gravity="center"
+        >
+
+
+        <Button
+            android:id="@+id/novoJogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/novo_jogo"
+            android:background="@android:color/transparent"
+            android:textColor="@color/branco"
+            android:textSize="25sp"
+
+            />
+
+        <Button
+            android:id="@+id/continuar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="continuar"
+            android:background="@android:color/transparent"
+            android:textColor="@color/branco"
+            android:textSize="25sp"/>
+
+        <Button
+            android:id="@+id/configurarBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/configurar"
+            android:background="@android:color/transparent"
+            android:textColor="@color/branco"
+            android:textSize="25sp"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/img_tetris"
+        android:layout_weight="0.2"
+        >
+
+
+    </ImageView>
+
 </LinearLayout>

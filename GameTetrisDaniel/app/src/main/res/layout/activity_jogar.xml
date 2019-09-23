@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".Jogar"
     android:gravity="center"
+    android:background="@drawable/fundo_jogar"
     >
 
     <LinearLayout
@@ -34,13 +35,33 @@
 
     </LinearLayout>
 
-    <GridLayout
-        android:id="@+id/gridboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/pauseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pause"
+            >
 
 
-    </GridLayout>
+        </Button>
+
+        <GridLayout
+            android:id="@+id/gridboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </GridLayout>
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,8 +74,9 @@
             android:id="@+id/esquerdaBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="e"
-            android:textSize="30sp">
+            android:background="@drawable/esquerda"
+            android:textSize="30sp"
+            >
 
         </Button>
 
@@ -63,7 +85,7 @@
             android:id="@+id/rotateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="R"
+            android:background="@drawable/rotate"
             android:textSize="30sp">
 
         </Button>
@@ -72,7 +94,7 @@
             android:id="@+id/direitaBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="d"
+            android:background="@drawable/direita"
             android:textSize="30sp">
 
         </Button>
@@ -90,7 +112,7 @@
             android:id="@+id/baixoBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="x"
+            android:background="@drawable/baixo"
             android:textSize="30sp">
 
         </Button>

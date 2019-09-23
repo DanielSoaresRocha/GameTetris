@@ -1,6 +1,7 @@
 package com.example.gametetrisdaniel
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,8 +13,8 @@ import java.util.*
 import kotlin.random.Random
 
 class Jogar : AppCompatActivity() {
-    val LINHA = 20
-    val COLUNA = 10
+    val LINHA = 20//36
+    val COLUNA = 20//27
     var running = true
     var speed : Long = 200
 
@@ -76,6 +77,16 @@ class Jogar : AppCompatActivity() {
         rotateButton.setOnClickListener {
             pt.moveRotate(COLUNA)
             colisionRotatePiece()
+        }
+
+        pauseButton.setOnClickListener {
+            if(running){
+                running = false
+            }else{
+                running = true
+                gameRun()
+            }
+
         }
     }
     fun gameRun(){
@@ -193,6 +204,9 @@ class Jogar : AppCompatActivity() {
     }
 
     fun novaPeca(){
+        verificaDerrota()
+        /*
+
         var peca = random.nextInt(5)
 
         if(peca == 0){
@@ -205,7 +219,8 @@ class Jogar : AppCompatActivity() {
             pt = Quadrado(3,COLUNA/2)
         }else{
             pt = T(3,COLUNA/2)
-        }
+        }*/
+        pt = I(3,COLUNA/2)
 
 
     }
@@ -287,5 +302,22 @@ class Jogar : AppCompatActivity() {
         speed = settings.getLong("speed",200)
     }
 
+    fun verificaDerrota(){
+        for(coluna in 0 until COLUNA){
+            if(board[3][coluna] == 1){
+                running = false
+
+                var i = Intent(this,GameOver::class.java)
+                var b = Bundle()
+
+                b.putString("pontuacaoAtual", pontuacao.text.toString())
+                i.putExtras(b)
+
+                startActivity(i)
+                break
+
+            }
+        }
+    }
 
 }
