@@ -48,7 +48,7 @@ class Quadrado(linha:Int,coluna:Int) : Piece(linha, coluna) {
         pontoD.moveTop()
     }
 
-    override fun moveRotate() {
+    override fun moveRotate(numColum: Int) {
 
     }
 

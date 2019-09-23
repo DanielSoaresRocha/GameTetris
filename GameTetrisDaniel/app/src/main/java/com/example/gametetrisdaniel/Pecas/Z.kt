@@ -42,20 +42,29 @@ class Z(linha:Int,coluna:Int) : Piece(linha, coluna) {
         pontoD.moveTop()
     }
 
-    override fun moveRotate() {
+    override fun moveRotate(numColum: Int) {
 
         if(estado.equals("normal")){
-            pontoB.linha = pontoA.linha-1
-            pontoB.coluna = pontoA.coluna
+            if(!(pontoA.coluna+1 >= numColum)){
+                pontoB.linha = pontoA.linha-1
+                pontoB.coluna = pontoA.coluna
 
-            pontoC.linha = pontoA.linha
-            pontoC.coluna = pontoA.coluna+1
+                pontoC.linha = pontoA.linha
+                pontoC.coluna = pontoA.coluna+1
 
-            pontoD.linha = pontoA.linha+1
-            pontoD.coluna = pontoA.coluna+1
+                pontoD.linha = pontoA.linha+1
+                pontoD.coluna = pontoA.coluna+1
 
-            estado = "rotacionado"
+                estado = "rotacionado"
+            }
+
         }else{
+           inverter()
+        }
+    }
+
+    fun inverter(){
+        if(!(pontoA.coluna-1 < 0)){
             pontoB.linha = pontoA.linha
             pontoB.coluna = pontoA.coluna-1
 
@@ -68,6 +77,7 @@ class Z(linha:Int,coluna:Int) : Piece(linha, coluna) {
             estado = "normal"
         }
     }
+
 
     override fun getColorPiece(): Int {
         return color

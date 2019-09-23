@@ -12,7 +12,7 @@ abstract class Piece(var linha:Int,var coluna:Int){
     abstract fun moveDown()
     abstract fun moveLeft()
     abstract fun moveRight()
-    abstract fun moveRotate()
+    abstract fun moveRotate(numColum: Int)
     abstract fun moveTop()
     abstract fun getColorPiece():Int
 

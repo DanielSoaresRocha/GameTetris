@@ -47,7 +47,7 @@ class T(linha:Int,coluna:Int) : Piece(linha, coluna) {
         pontoD.moveTop()
     }
 
-    override fun moveRotate() {
+    override fun moveRotate(numColum: Int) {
         /*
         pontoB.linha += 1
         pontoB.coluna += 1
@@ -59,17 +59,27 @@ class T(linha:Int,coluna:Int) : Piece(linha, coluna) {
         pontoD.coluna -= 1*/
 
         if (estado.equals("normal")) {
-            pontoB.linha = pontoA.linha-1
-            pontoB.coluna = pontoA.coluna
+            if(!(pontoA.coluna+1 >= numColum)){
 
-            pontoC.linha = pontoA.linha
-            pontoC.coluna = pontoA.coluna+1
+                pontoB.linha = pontoA.linha-1
+                pontoB.coluna = pontoA.coluna
 
-            pontoD.linha = pontoA.linha+1
-            pontoD.coluna = pontoA.coluna
+                pontoC.linha = pontoA.linha
+                pontoC.coluna = pontoA.coluna+1
 
-            estado = "rotacionado"
+                pontoD.linha = pontoA.linha+1
+                pontoD.coluna = pontoA.coluna
+
+                estado = "rotacionado"
+            }
+
         } else {
+           inverter()
+        }
+    }
+
+    fun inverter(){
+        if(!(pontoA.coluna-1 < 0)){
             pontoB.linha = pontoA.linha
             pontoB.coluna = pontoA.coluna-1
 

@@ -47,42 +47,42 @@ class L(linha:Int,coluna:Int) : Piece(linha, coluna) {
         pontoD.moveTop()
     }
 
-    override fun moveRotate() {
-        /*
-        pontoB.linha += 1
-        pontoB.coluna += 1
-
-        pontoC.linha += 2
-        pontoC.coluna += 2
-
-        pontoD.linha += 1
-        pontoD.coluna -= 1*/
-
+    override fun moveRotate(numColum: Int) {
         if(estado.equals("normal")){
-            pontoB.linha = pontoA.linha
-            pontoB.coluna = pontoA.coluna+1
+            if(!(pontoA.coluna+2 >= numColum)){
+                pontoB.linha = pontoA.linha
+                pontoB.coluna = pontoA.coluna+1
 
-            pontoC.linha = pontoA.linha
-            pontoC.coluna = pontoA.coluna+2
+                pontoC.linha = pontoA.linha
+                pontoC.coluna = pontoA.coluna+2
 
-            pontoD.linha = pontoA.linha+1
-            pontoD.coluna = pontoA.coluna
+                pontoD.linha = pontoA.linha+1
+                pontoD.coluna = pontoA.coluna
 
-            estado = "rotacionado"
+                estado = "rotacionado"
+            }
+
         }else{
-            pontoB.linha = pontoA.linha-1
-            pontoB.coluna = pontoA.coluna
-
-            pontoC.linha = pontoA.linha-2
-            pontoC.coluna = pontoA.coluna
-
-            pontoD.linha = pontoA.linha
-            pontoD.coluna = pontoA.coluna+1
-
-            estado = "normal"
+            inverter()
         }
 
     }
+
+    fun inverter(){
+
+            pontoB.linha = pontoA.linha - 1
+            pontoB.coluna = pontoA.coluna
+
+            pontoC.linha = pontoA.linha - 2
+            pontoC.coluna = pontoA.coluna
+
+            pontoD.linha = pontoA.linha
+            pontoD.coluna = pontoA.coluna + 1
+
+            estado = "normal"
+
+    }
+
     override fun getColorPiece(): Int {
         return color
     }

@@ -74,8 +74,8 @@ class Jogar : AppCompatActivity() {
         }
 
         rotateButton.setOnClickListener {
-            pt.moveRotate()
-
+            pt.moveRotate(COLUNA)
+            colisionRotatePiece()
         }
     }
     fun gameRun(){
@@ -275,10 +275,17 @@ class Jogar : AppCompatActivity() {
         return false
     }
 
+    fun colisionRotatePiece(){
+        if(board[pt.pontoA.linha][pt.pontoA.coluna] == 1 || board[pt.pontoB.linha][pt.pontoB.coluna] == 1
+            || board[pt.pontoC.linha][pt.pontoC.coluna] == 1 || board[pt.pontoD.linha][pt.pontoD.coluna] == 1){
+            pt.moveRotate(COLUNA)
+        }
+    }
+
     fun pegarVelocidade(){
         val settings = getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-
         speed = settings.getLong("speed",200)
     }
+
 
 }

@@ -43,35 +43,38 @@ class I(linha:Int,coluna:Int) : Piece(linha, coluna){
         pontoD.moveTop()
     }
 
-    override fun moveRotate() {
+    override fun moveRotate(numColum: Int) {
 
         if(estado.equals("normal")){
-            pontoB.linha = pontoA.linha
-            pontoB.coluna = pontoA.coluna+1
+            if(!(pontoA.coluna+3 >= numColum)){ //se a rotacao for ultrapassar a borda ele não deixa
+                pontoB.linha = pontoA.linha
+                pontoB.coluna = pontoA.coluna+1
 
-            pontoC.linha = pontoA.linha
-            pontoC.coluna = pontoA.coluna+2
+                pontoC.linha = pontoA.linha
+                pontoC.coluna = pontoA.coluna+2
 
-            pontoD.linha = pontoA.linha
-            pontoD.coluna = pontoA.coluna+3
+                pontoD.linha = pontoA.linha
+                pontoD.coluna = pontoA.coluna+3
 
-            estado = "rotacionado"
+                estado = "rotacionado"
+            }
         }else{
             inverter()
         }
     }
 
     fun inverter(){
-        pontoB.linha = pontoA.linha-1
-        pontoB.coluna = pontoA.coluna
+            pontoB.linha = pontoA.linha-1
+            pontoB.coluna = pontoA.coluna
 
-        pontoC.linha = pontoA.linha-2
-        pontoC.coluna = pontoA.coluna
+            pontoC.linha = pontoA.linha-2
+            pontoC.coluna = pontoA.coluna
 
-        pontoD.linha = pontoA.linha-3
-        pontoD.coluna = pontoA.coluna
+            pontoD.linha = pontoA.linha-3
+            pontoD.coluna = pontoA.coluna
 
-        estado = "normal"
+            estado = "normal"
+
     }
 
     override fun getColorPiece():Int{
