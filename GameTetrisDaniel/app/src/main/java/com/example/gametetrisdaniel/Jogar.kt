@@ -13,11 +13,12 @@ import com.example.gametetrisdaniel.Pecas.*
 import kotlinx.android.synthetic.main.activity_jogar.*
 import java.util.*
 import kotlin.random.Random
+import com.example.gametetrisdaniel.R
 
 class Jogar : AppCompatActivity() {
 
-    val LINHA = 20//36
-    val COLUNA = 20//27
+    val LINHA = 30//36
+    val COLUNA = 27//27
     var running = true
     var speed : Long = 200
 
@@ -25,10 +26,7 @@ class Jogar : AppCompatActivity() {
 
     var pt : Piece = I(3,COLUNA/2)
     var random = Random
-    /*
-    var board = Array(LINHA) {
-        Array(COLUNA){0}
-    }*/
+    var novaPeca = 1
 
     var tabuleiro = Array(LINHA){
         arrayOfNulls<ImageView>(COLUNA)
@@ -40,6 +38,7 @@ class Jogar : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getSupportActionBar()?.hide() //tirar barra de título
         setContentView(R.layout.activity_jogar)
 
         pegarVelocidade()
@@ -57,6 +56,7 @@ class Jogar : AppCompatActivity() {
         }
 
         tocarMusica()
+        novaPeca()
         gameRun()
 
         //verificaPontos()
@@ -214,8 +214,7 @@ class Jogar : AppCompatActivity() {
     fun novaPeca(){
         verificaDerrota()
 
-
-        var peca = random.nextInt(5)
+        var peca = novaPeca
 
         if(peca == 0){
             pt = L(3,COLUNA/2)
@@ -228,7 +227,20 @@ class Jogar : AppCompatActivity() {
         }else{
             pt = T(3,COLUNA/2)
         }
-        //pt = I(3,COLUNA/2)
+
+        novaPeca = random.nextInt(5)
+
+        if(novaPeca == 0){
+            proximaImageView.setImageResource(R.drawable.l_peca)
+        }else if(novaPeca == 1){
+            proximaImageView.setImageResource(R.drawable.i_peca)
+        }else if(novaPeca == 2){
+            proximaImageView.setImageResource(R.drawable.z_peca)
+        }else if(novaPeca == 4){
+            proximaImageView.setImageResource(R.drawable.quadrado_peca)
+        }else{
+            proximaImageView.setImageResource(R.drawable.t_peca)
+        }
 
 
     }
@@ -322,6 +334,7 @@ class Jogar : AppCompatActivity() {
                 i.putExtras(b)
 
                 startActivity(i)
+                finish()
                 break
 
             }
@@ -340,7 +353,7 @@ class Jogar : AppCompatActivity() {
     }
 
     fun tocarMusica(){
-        //val mp : MediaPlayer = MediaPlayer.create(this,R.)
+        //val mp : MediaPlayer = MediaPlayer.create(this,R.raw.musicafundo)
         //mp.start()
 
     }

@@ -22,4 +22,11 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+    override fun onResume() {
+        if (intent.getBooleanExtra("SAIR", false)) {
+            finish()
+        }
+        super.onResume()
+    }
 }

@@ -6,7 +6,7 @@ import com.example.gametetrisdaniel.R
 
 class T(linha:Int,coluna:Int) : Piece(linha, coluna) {
     var estado = "normal"
-    val color : Int = R.drawable.purple
+    val color : Int = R.drawable.blue_claro
 
     init {
         pontoB = Ponto(linha, coluna-1)

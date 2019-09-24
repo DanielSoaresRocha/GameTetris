@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="right"
+        android:gravity="center"
+        android:paddingVertical="30sp"
         >
 
         <TextView
@@ -22,6 +23,7 @@
             android:layout_height="wrap_content"
             android:text="@string/pontuacao"
             android:textSize="25sp"
+            android:textColor="@color/branco"
             />
 
         <TextView
@@ -29,9 +31,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            android:textSize="25sp">
+            android:textSize="25sp"
+            android:textColor="@color/verde"
+            >
 
         </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Próxima: "
+            android:textSize="25sp"
+            android:textColor="@color/branco"
+            android:paddingHorizontal="20sp"
+            />
+
+        <ImageView
+            android:id="@+id/proximaImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </ImageView>
 
     </LinearLayout>
 
@@ -39,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
+        android:gravity="left"
         >
 
         <Button

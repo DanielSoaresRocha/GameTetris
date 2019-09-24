@@ -1,6 +1,7 @@
 package com.example.gametetrisdaniel
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -15,6 +16,7 @@ class GameOver : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_over)
 
+        listener()
         //pegando da dos da itent
         var params = intent.extras
         var pontuacaoRecebida = params?.getString("pontuacaoAtual") // pontuação vinda da activity
@@ -41,4 +43,20 @@ class GameOver : AppCompatActivity() {
 
 
     }
+
+    fun listener(){
+        novoJogoBtn.setOnClickListener {
+            var i = Intent(this,Jogar::class.java)
+            startActivity(i)
+        }
+
+        sairBtn.setOnClickListener {
+            val it = Intent(applicationContext, MainActivity::class.java)
+            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            it.putExtra("SAIR", true)
+            startActivity(it)
+        }
+
+    }
+
 }
