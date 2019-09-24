@@ -30,7 +30,7 @@
             android:id="@+id/pontuacao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
+            android:text="800"
             android:textSize="25sp"
             android:textColor="@color/verde"
             >
@@ -76,6 +76,7 @@
             android:id="@+id/gridboard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             >
 
         </GridLayout>

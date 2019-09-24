@@ -17,8 +17,8 @@ import com.example.gametetrisdaniel.R
 
 class Jogar : AppCompatActivity() {
 
-    val LINHA = 30//36
-    val COLUNA = 27//27
+    val LINHA = 20//36
+    val COLUNA = 20//27
     var running = true
     var speed : Long = 200
 
@@ -51,7 +51,7 @@ class Jogar : AppCompatActivity() {
         for (i in 0 until LINHA) {
             for (j in 0 until COLUNA) {
                 tabuleiro[i][j] = inflater.inflate(R.layout.inflate_image_view, gridboard, false) as ImageView
-                gridboard.addView( tabuleiro[i][j])
+                gridboard.addView(tabuleiro[i][j])
             }
         }
 
@@ -105,7 +105,7 @@ class Jogar : AppCompatActivity() {
                     //limpa tela
                     for (i in 0 until LINHA) {
                         for (j in 0 until COLUNA) {
-                            if (vm.board[i][j] == 0){
+                            if(vm.board[i][j] == 0){
                                 tabuleiro[i][j]!!.setImageResource(R.drawable.black)
                             }
                         }
@@ -212,7 +212,9 @@ class Jogar : AppCompatActivity() {
     }
 
     fun novaPeca(){
-        verificaDerrota()
+        if(running){ //Isto não permite que ele faça isto mais que uma vez
+            verificaDerrota()
+        }
 
         var peca = novaPeca
 
@@ -323,20 +325,19 @@ class Jogar : AppCompatActivity() {
     }
 
     fun verificaDerrota(){
-        for(coluna in 0 until COLUNA){
-            if(vm.board[3][coluna] == 1){
-                running = false
+        for(coluna in 0 until COLUNA) {
+                if (vm.board[3][coluna] == 1) {
+                    running = false
 
-                var i = Intent(this,GameOver::class.java)
-                var b = Bundle()
+                    var i = Intent(this, GameOver::class.java)
+                    var b = Bundle()
 
-                b.putString("pontuacaoAtual", pontuacao.text.toString())
-                i.putExtras(b)
+                    b.putString("pontuacaoAtual", pontuacao.text.toString())
+                    i.putExtras(b)
 
-                startActivity(i)
-                finish()
-                break
-
+                    startActivity(i)
+                    finish()
+                    break
             }
         }
     }
@@ -357,6 +358,5 @@ class Jogar : AppCompatActivity() {
         //mp.start()
 
     }
-
 
 }
