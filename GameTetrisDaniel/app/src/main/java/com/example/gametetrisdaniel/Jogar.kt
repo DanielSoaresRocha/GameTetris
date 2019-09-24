@@ -13,7 +13,11 @@ import com.example.gametetrisdaniel.Pecas.*
 import kotlinx.android.synthetic.main.activity_jogar.*
 import java.util.*
 import kotlin.random.Random
-import com.example.gametetrisdaniel.R
+//import com.example.gametetrisdaniel.R
+import android.R.attr.start
+//import android.R
+
+
 
 class Jogar : AppCompatActivity() {
 
@@ -31,6 +35,8 @@ class Jogar : AppCompatActivity() {
     var tabuleiro = Array(LINHA){
         arrayOfNulls<ImageView>(COLUNA)
     }
+
+    var mp :MediaPlayer? = null
 
     val vm: BoardViewModel by lazy {
         ViewModelProviders.of(this)[BoardViewModel::class.java]
@@ -354,8 +360,14 @@ class Jogar : AppCompatActivity() {
     }
 
     fun tocarMusica(){
-        val mp : MediaPlayer = MediaPlayer.create(this,R.raw.musicafundo)
-        mp.start()
+        mp = MediaPlayer.create(this,R.raw.musicafundo)
+        mp?.setOnCompletionListener { mp ->
+            var mp = mp
+            mp!!.stop()
+            mp!!.release()
+            mp = null
+        }
+        mp?.start()
 
     }
 
