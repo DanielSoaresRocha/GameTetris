@@ -17,8 +17,8 @@ import com.example.gametetrisdaniel.R
 
 class Jogar : AppCompatActivity() {
 
-    val LINHA = 20//36
-    val COLUNA = 20//27
+    val LINHA = 30//36
+    val COLUNA = 27//27
     var running = true
     var speed : Long = 200
 
@@ -354,8 +354,8 @@ class Jogar : AppCompatActivity() {
     }
 
     fun tocarMusica(){
-        //val mp : MediaPlayer = MediaPlayer.create(this,R.raw.musicafundo)
-        //mp.start()
+        val mp : MediaPlayer = MediaPlayer.create(this,R.raw.musicafundo)
+        mp.start()
 
     }
 
