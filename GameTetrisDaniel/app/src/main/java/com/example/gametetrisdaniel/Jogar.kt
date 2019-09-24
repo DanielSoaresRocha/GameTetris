@@ -2,6 +2,7 @@ package com.example.gametetrisdaniel
 
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import java.util.*
 import kotlin.random.Random
 
 class Jogar : AppCompatActivity() {
+
     val LINHA = 20//36
     val COLUNA = 20//27
     var running = true
@@ -54,6 +56,7 @@ class Jogar : AppCompatActivity() {
             }
         }
 
+        tocarMusica()
         gameRun()
 
         //verificaPontos()
@@ -210,7 +213,7 @@ class Jogar : AppCompatActivity() {
 
     fun novaPeca(){
         verificaDerrota()
-        /*
+
 
         var peca = random.nextInt(5)
 
@@ -224,8 +227,8 @@ class Jogar : AppCompatActivity() {
             pt = Quadrado(3,COLUNA/2)
         }else{
             pt = T(3,COLUNA/2)
-        }*/
-        pt = I(3,COLUNA/2)
+        }
+        //pt = I(3,COLUNA/2)
 
 
     }
@@ -335,5 +338,12 @@ class Jogar : AppCompatActivity() {
         running = true
         gameRun()
     }
+
+    fun tocarMusica(){
+        //val mp : MediaPlayer = MediaPlayer.create(this,R.)
+        //mp.start()
+
+    }
+
 
 }
