@@ -380,14 +380,14 @@ class Jogar : AppCompatActivity() {
         edit.putInt("ponto_A_linha", pt.pontoA.linha)
         edit.putInt("ponto_A_coluna", pt.pontoA.coluna)
 
-        edit.putInt("ponto_B_linha", pt.pontoA.linha)
-        edit.putInt("ponto_B_coluna", pt.pontoA.coluna)
+        edit.putInt("ponto_B_linha", pt.pontoB.linha)
+        edit.putInt("ponto_B_coluna", pt.pontoB.coluna)
 
-        edit.putInt("ponto_C_linha", pt.pontoA.linha)
-        edit.putInt("ponto_C_coluna", pt.pontoA.coluna)
+        edit.putInt("ponto_C_linha", pt.pontoC.linha)
+        edit.putInt("ponto_C_coluna", pt.pontoC.coluna)
 
-        edit.putInt("ponto_D_linha", pt.pontoA.linha)
-        edit.putInt("ponto_D_coluna", pt.pontoA.coluna)
+        edit.putInt("ponto_D_linha", pt.pontoD.linha)
+        edit.putInt("ponto_D_coluna", pt.pontoD.coluna)
 
         edit.putInt("pieceColor",pt.getColorPiece())
         Log.i("RESTAURACAO", "cor = " + pt.getColorPiece())
