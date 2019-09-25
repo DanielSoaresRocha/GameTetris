@@ -6,7 +6,12 @@ class BoardViewModel : ViewModel() {
     val LINHA = 30
     val COLUNA = 27
 
+    val PREFS = "speed_file"
+
     var board = Array(LINHA) {
         Array(COLUNA) { 0 }
     }
+
+
+
 }

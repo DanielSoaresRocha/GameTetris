@@ -15,6 +15,9 @@ import java.util.*
 import kotlin.random.Random
 //import com.example.gametetrisdaniel.R
 import android.R.attr.start
+import android.view.View
+import kotlinx.android.synthetic.main.activity_main.*
+
 //import android.R
 
 
@@ -61,8 +64,8 @@ class Jogar : AppCompatActivity() {
             }
         }
 
+        verificaContinuacao()
         tocarMusica()
-        novaPeca()
         gameRun()
 
         //verificaPontos()
@@ -113,34 +116,19 @@ class Jogar : AppCompatActivity() {
                         for (j in 0 until COLUNA) {
                             if(vm.board[i][j] == 0){
                                 tabuleiro[i][j]!!.setImageResource(R.drawable.black)
+                            }else{
+                                tabuleiro[i][j]!!.setImageResource(vm.board[i][j])
                             }
                         }
                     }
                     //move peça atual
-
                     moverBaixo()
-
                     //print peça
                     try {
                         desenharPeca()
                         //Log.i("OK","FEZ")
                     }catch (e:ArrayIndexOutOfBoundsException ) {
-                        //se a peça passou das bordas eu vou parar o jogo
-                        //running = false
-                        /*Log.i("ERRO","Deu erro"+ e.message)
-                        Log.i("INFORMACAO","PONTOA linha = "+ pt.pontoA.linha)
-                        Log.i("INFORMACAO","PONTOA linha = "+ pt.pontoA.coluna)
 
-                        Log.i("INFORMACAO","PONTOB linha = "+ pt.pontoB.linha)
-                        Log.i("INFORMACAO","PONTOB linha = "+ pt.pontoB.coluna)
-
-                        Log.i("INFORMACAO","PONTOC linha = "+ pt.pontoC.linha)
-                        Log.i("INFORMACAO","PONTOC linha = "+ pt.pontoC.coluna)
-
-                        Log.i("INFORMACAO","PONTOD linha = "+ pt.pontoD.linha)
-                        Log.i("INFORMACAO","PONTOD linha = "+ pt.pontoD.coluna)*/
-
-                        //bateuLateral()
                     }
 
                 }
@@ -161,10 +149,10 @@ class Jogar : AppCompatActivity() {
     }
 
     fun atualizar(){
-        vm.board[pt.pontoA.linha][pt.pontoA.coluna] =1
-        vm.board[pt.pontoB.linha][pt.pontoB.coluna] =1
-        vm.board[pt.pontoC.linha][pt.pontoC.coluna] =1
-        vm.board[pt.pontoD.linha][pt.pontoD.coluna] =1
+        vm.board[pt.pontoA.linha][pt.pontoA.coluna] = pt.getColorPiece()
+        vm.board[pt.pontoB.linha][pt.pontoB.coluna] = pt.getColorPiece()
+        vm.board[pt.pontoC.linha][pt.pontoC.coluna] = pt.getColorPiece()
+        vm.board[pt.pontoD.linha][pt.pontoD.coluna] = pt.getColorPiece()
 
         verificaPontos()
         desenharPeca()
@@ -255,8 +243,8 @@ class Jogar : AppCompatActivity() {
 
     fun bateuPeca():Boolean{
             try {
-            if((vm.board[pt.pontoA.linha+1][pt.pontoA.coluna] == 1) || (vm.board[pt.pontoB.linha+1][pt.pontoB.coluna] == 1)//bateu no final da peca
-                || (vm.board[pt.pontoC.linha+1][pt.pontoC.coluna] == 1) || (vm.board[pt.pontoD.linha+1][pt.pontoD.coluna] == 1)){
+            if((vm.board[pt.pontoA.linha+1][pt.pontoA.coluna] != 0) || (vm.board[pt.pontoB.linha+1][pt.pontoB.coluna] != 0)//bateu no final da peca
+                || (vm.board[pt.pontoC.linha+1][pt.pontoC.coluna] != 0) || (vm.board[pt.pontoD.linha+1][pt.pontoD.coluna] != 0)){
                 //bateuFinal()
                 atualizar()
                 return true
@@ -296,8 +284,8 @@ class Jogar : AppCompatActivity() {
 
     fun bateuDireitaPeca():Boolean{
         try {
-            if((vm.board[pt.pontoA.linha][pt.pontoA.coluna+1] == 1) || (vm.board[pt.pontoB.linha][pt.pontoB.coluna+1] == 1)
-                || (vm.board[pt.pontoC.linha][pt.pontoC.coluna+1] == 1) || (vm.board[pt.pontoD.linha][pt.pontoD.coluna+1] == 1)) {//bateu no lado direito
+            if((vm.board[pt.pontoA.linha][pt.pontoA.coluna+1] != 0) || (vm.board[pt.pontoB.linha][pt.pontoB.coluna+1] != 0)
+                || (vm.board[pt.pontoC.linha][pt.pontoC.coluna+1] != 0) || (vm.board[pt.pontoD.linha][pt.pontoD.coluna+1] != 0)) {//bateu no lado direito
                 return true
                 }
         }catch (e:ArrayIndexOutOfBoundsException){
@@ -308,8 +296,8 @@ class Jogar : AppCompatActivity() {
 
     fun bateuEsquerdaPeca():Boolean{
         try {
-            if((vm.board[pt.pontoA.linha][pt.pontoA.coluna-1] == 1) || (vm.board[pt.pontoB.linha][pt.pontoB.coluna-1] == 1)
-                || (vm.board[pt.pontoC.linha][pt.pontoC.coluna-1] == 1) || (vm.board[pt.pontoD.linha][pt.pontoD.coluna-1] == 1)) {//bateu no lado esquerdo
+            if((vm.board[pt.pontoA.linha][pt.pontoA.coluna-1] != 0) || (vm.board[pt.pontoB.linha][pt.pontoB.coluna-1] != 0)
+                || (vm.board[pt.pontoC.linha][pt.pontoC.coluna-1] != 0) || (vm.board[pt.pontoD.linha][pt.pontoD.coluna-1] != 0)) {//bateu no lado esquerdo
                 return true
             }
         }catch (e:ArrayIndexOutOfBoundsException){
@@ -319,8 +307,8 @@ class Jogar : AppCompatActivity() {
     }
 
     fun colisionRotatePiece(){
-        if(vm.board[pt.pontoA.linha][pt.pontoA.coluna] == 1 || vm.board[pt.pontoB.linha][pt.pontoB.coluna] == 1
-            || vm.board[pt.pontoC.linha][pt.pontoC.coluna] == 1 || vm.board[pt.pontoD.linha][pt.pontoD.coluna] == 1){
+        if(vm.board[pt.pontoA.linha][pt.pontoA.coluna] != 0 || vm.board[pt.pontoB.linha][pt.pontoB.coluna] != 0
+            || vm.board[pt.pontoC.linha][pt.pontoC.coluna] != 0 || vm.board[pt.pontoD.linha][pt.pontoD.coluna] != 0){
             pt.moveRotate(COLUNA)
         }
     }
@@ -332,7 +320,7 @@ class Jogar : AppCompatActivity() {
 
     fun verificaDerrota(){
         for(coluna in 0 until COLUNA) {
-                if (vm.board[3][coluna] == 1) {
+                if (vm.board[3][coluna] != 0) {
                     running = false
 
                     var i = Intent(this, GameOver::class.java)
@@ -351,12 +339,98 @@ class Jogar : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         running = false
+
+        salvarEstado()
     }
 
     override fun onRestart() {
         super.onRestart()
         running = true
         gameRun()
+
+        mp?.stop()
+        mp = null
+        tocarMusica()
+
+        restaurarEstado()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        val setting = getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+        var edit = setting.edit()
+
+        edit.putBoolean("continuar",true)
+        edit.commit()
+
+    }
+
+    fun salvarEstado(){
+        val setting = getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+        var edit = setting.edit()
+
+        for (i in 0..LINHA-1) {
+            for(j in 0..COLUNA-1){
+                edit.putInt("L"+i+"C"+j,vm.board[i][j])
+                Log.i("ESTADO","L"+i+"C"+j +" numPosicao:" +vm.board[i][j])
+            }
+        }
+
+        edit.putInt("ponto_A_linha", pt.pontoA.linha)
+        edit.putInt("ponto_A_coluna", pt.pontoA.coluna)
+
+        edit.putInt("ponto_B_linha", pt.pontoA.linha)
+        edit.putInt("ponto_B_coluna", pt.pontoA.coluna)
+
+        edit.putInt("ponto_C_linha", pt.pontoA.linha)
+        edit.putInt("ponto_C_coluna", pt.pontoA.coluna)
+
+        edit.putInt("ponto_D_linha", pt.pontoA.linha)
+        edit.putInt("ponto_D_coluna", pt.pontoA.coluna)
+
+        edit.putInt("pieceColor",pt.getColorPiece())
+        Log.i("RESTAURACAO", "cor = " + pt.getColorPiece())
+
+        edit.commit()
+
+    }
+
+    fun restaurarEstado(){
+        val setting = getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+
+        for (i in 0..LINHA-1) {
+            for(j in 0..COLUNA-1){
+                vm.board[i][j] = setting.getInt("L"+i+"C"+j,0)
+                //Log.i("ESTADO","L"+i+"C"+j +" numPosicao:" +vm.board[i][j])
+            }
+        }
+
+        pt.pontoA.linha = setting.getInt("ponto_A_linha",0)
+        pt.pontoA.coluna = setting.getInt("ponto_A_coluna",0)
+        pt.pontoB.linha = setting.getInt("ponto_B_linha",0)
+        pt.pontoB.coluna = setting.getInt("ponto_B_coluna",0)
+        pt.pontoC.linha = setting.getInt("ponto_C_linha",0)
+        pt.pontoC.coluna = setting.getInt("ponto_C_coluna",0)
+        pt.pontoD.linha = setting.getInt("ponto_D_linha",0)
+        pt.pontoD.coluna = setting.getInt("ponto_D_coluna",0)
+
+
+
+        pt.setColorPiece(setting.getInt("pieceColor",R.color.branco))
+        desenharPeca()
+
+    }
+
+    fun verificaContinuacao(){
+        //pegando da dos da itent
+        var params = intent.extras
+
+        var continuar = params?.getBoolean("continuar",false) // pontuação vinda da activity
+        if(continuar is Boolean){
+            restaurarEstado()
+        }
+
     }
 
     fun tocarMusica(){
@@ -368,7 +442,6 @@ class Jogar : AppCompatActivity() {
             mp = null
         }
         mp?.start()
-
     }
 
 }

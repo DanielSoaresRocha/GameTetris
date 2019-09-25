@@ -7,7 +7,7 @@ import com.example.gametetrisdaniel.R
 class Quadrado(linha:Int,coluna:Int) : Piece(linha, coluna) {
 
     var estado = "normal"
-    val color : Int = R.drawable.green
+    var color : Int = R.drawable.green
 
     init {
         pontoB = Ponto(linha-1, coluna)
@@ -54,5 +54,9 @@ class Quadrado(linha:Int,coluna:Int) : Piece(linha, coluna) {
 
     override fun getColorPiece(): Int {
         return color
+    }
+
+    override fun setColorPiece(colorRecebida: Int) {
+        color = colorRecebida
     }
 }

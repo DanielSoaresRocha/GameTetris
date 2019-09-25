@@ -15,6 +15,8 @@ abstract class Piece(var linha:Int,var coluna:Int){
     abstract fun moveRotate(numColum: Int)
     abstract fun moveTop()
     abstract fun getColorPiece():Int
+    abstract fun setColorPiece(color :Int)
+
 
 
 }

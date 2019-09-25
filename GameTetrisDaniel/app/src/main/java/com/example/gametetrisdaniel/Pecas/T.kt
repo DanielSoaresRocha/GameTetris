@@ -6,7 +6,7 @@ import com.example.gametetrisdaniel.R
 
 class T(linha:Int,coluna:Int) : Piece(linha, coluna) {
     var estado = "normal"
-    val color : Int = R.drawable.blue_claro
+    var color : Int = R.drawable.blue_claro
 
     init {
         pontoB = Ponto(linha, coluna-1)
@@ -95,5 +95,9 @@ class T(linha:Int,coluna:Int) : Piece(linha, coluna) {
 
     override fun getColorPiece(): Int {
         return color
+    }
+
+    override fun setColorPiece(colorRecebida: Int) {
+        color = colorRecebida
     }
 }
