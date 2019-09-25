@@ -4,4 +4,14 @@
     <string name="configurar">configurar</string>
     <string name="pontuacao">Pontuação:  </string>
     <string name="selecione_a_dificuldade">Selecione a dificuldade:</string>
+    <string name="facil">Fácil</string>
+    <string name="medio">Médio</string>
+    <string name="dificil">Dificil</string>
+    <string name="cancelar">cancelar</string>
+    <string name="salvar">salvar</string>
+    <string name="pontuacaoOver">Pontuação:</string>
+    <string name="recorde">Recorde:</string>
+    <string name="sair">sair</string>
+    <string name="proxima">Próxima:</string>
+    <string name="continuar">continuar</string>
 </resources>

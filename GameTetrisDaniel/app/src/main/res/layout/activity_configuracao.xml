@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/black"
+    android:background="@drawable/fundo_jogar"
     android:gravity="top"
     android:orientation="vertical"
     tools:context=".Configuracao">
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="10sp"
-                android:text="Fácil"
+                android:text="@string/facil"
                 android:textColor="@color/verde"
                 android:textSize="20sp">
 
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="10sp"
-                android:text="Médio"
+                android:text="@string/medio"
                 android:textColor="@color/colorAccent"
                 android:textSize="20sp">
 
@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="10sp"
-                android:text="Dificil"
+                android:text="@string/dificil"
                 android:textColor="@color/vermelhoo"
                 android:textSize="20sp">
 
@@ -88,7 +88,7 @@
             android:id="@+id/cancelBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="cancelar"
+            android:text="@string/cancelar"
             android:background="@android:color/transparent"
             android:textColor="@color/branco"
             android:textSize="25sp"
@@ -102,7 +102,7 @@
             android:id="@+id/salvarBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="salvar"
+            android:text="@string/salvar"
             android:background="@android:color/transparent"
             android:textColor="@color/branco"
             android:textSize="25sp"

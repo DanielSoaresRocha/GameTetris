@@ -35,15 +35,16 @@ class GameOver : AppCompatActivity() {
 
         var pontuacaoAtual : Int = Integer.parseInt(pontuacaoRecebida.toString())
 
+        edit.putBoolean("continuar",false) //se perdeu o jogo, ele não precisa continuar
 
         if(pontuacaoAtual > recorde){
 
             novoRecordTextView.visibility = View.VISIBLE
 
             edit.putInt("recorde", pontuacaoAtual)
-            edit.commit()
         }
 
+        edit.commit()
 
     }
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GameTetrisDaniel</string>
+    <string name="cancelar">cancel</string>
+    <string name="configurar">settings</string>
+    <string name="continuar">continue</string>
+    <string name="dificil">hard</string>
+    <string name="facil">easy</string>
+    <string name="medio">normal</string>
+    <string name="novo_jogo">New Game</string>
+    <string name="pontuacao">score</string>
+    <string name="pontuacaoOver">score</string>
+    <string name="proxima">next</string>
+    <string name="recorde">record</string>
+    <string name="sair">quit</string>
+    <string name="salvar">salve</string>
+    <string name="selecione_a_dificuldade">" select difficulty"</string>
+</resources>

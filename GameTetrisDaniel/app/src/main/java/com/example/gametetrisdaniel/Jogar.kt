@@ -24,8 +24,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class Jogar : AppCompatActivity() {
 
-    val LINHA = 30//36
-    val COLUNA = 27//27
+    val LINHA = 20//36
+    val COLUNA = 20//27
     var running = true
     var speed : Long = 200
 
@@ -99,6 +99,11 @@ class Jogar : AppCompatActivity() {
         pauseButton.setOnClickListener {
             if(running){
                 running = false
+                var telaInicial = Intent(this, MainActivity::class.java)
+                startActivity(telaInicial)
+                onPause()
+                onStop()
+                finish()
             }else{
                 running = true
                 gameRun()
@@ -171,7 +176,7 @@ class Jogar : AppCompatActivity() {
         for (i in 0..LINHA-1) {
             var pont = 0
             for(j in 0..COLUNA-1){
-                if(vm.board[i][j] == 1){
+                if(vm.board[i][j] != 0){
                     pont++
                 }else{
                     break
@@ -197,9 +202,11 @@ class Jogar : AppCompatActivity() {
         for(linhaa in linha-1 downTo 0){
             for(coluna in COLUNA-1 downTo 0){
                 println("Linha = "+ linhaa+ "coluna = "+ coluna)
-                if(vm.board[linhaa][coluna] == 1){
+                if(vm.board[linhaa][coluna] != 0){
+                    vm.board[linhaa+1][coluna] = vm.board[linhaa][coluna]
                     vm.board[linhaa][coluna] = 0
-                    vm.board[linhaa+1][coluna] = 1
+                    //vm.board[linhaa][coluna] = 0
+                    //vm.board[linhaa+1][coluna] = 1
                 }
             }
         }
@@ -330,6 +337,8 @@ class Jogar : AppCompatActivity() {
                     i.putExtras(b)
 
                     startActivity(i)
+                    //onPause()
+                    //onStop()
                     finish()
                     break
             }
@@ -434,7 +443,7 @@ class Jogar : AppCompatActivity() {
     }
 
     fun tocarMusica(){
-        mp = MediaPlayer.create(this,R.raw.musicafundo)
+        mp = MediaPlayer.create(this,R.raw.musica_fundo)
         mp?.setOnCompletionListener { mp ->
             var mp = mp
             mp!!.stop()
