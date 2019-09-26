@@ -27,8 +27,7 @@ A velocidade normal é escolhida por padrão quando o aplicativo é instalado.
 - Continuar: Botão opcional. Deve aparecer apenas se houver um estado de jogo anterior pausado. O jogo poderá ser pausado quando o sistema operacional invoca o método onPause() do ciclo de vida ou quando o usuário aperta o botão “Pause” na tela do tabuleiro. Abre a tela Tabuleiro. 
 - Configurações: Abre a tela Configurações onde o usuário poderá selecionar a dificuldade. Caso algum dado seja alterado nessa tela o jogo que estava pausado, se houver, não é perdido.
 
-
-	Tabuleiro
+		Tabuleiro
 
 Activity que é invocada quando o usuário clica no botão “Novo Jogo” ou “Continuar” da tela inicial. Um tabuleiro deve ser montado dinamicamente com 20 blocos de largura e 20 blocos de altura. A parte vazia do tabuleiro é representada por um bloco preto com bordas brancas. Caso o usuário queria continuar um jogo salvo, a Activity recarregar o estado anterior (peça atual, posição da peça atual, peças empilhadas, próxima peça). Caso seja um novo jogo, é gerado aleatoriamente a primeira peça do jogo e a próxima peça. A primeira peça começa no centro e topo do tabuleiro. Tal peça se deslocar gradativamente para a parte de baixo do tabuleiro seguindo a velocidade selecionada.
 
