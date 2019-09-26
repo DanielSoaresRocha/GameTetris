@@ -13,7 +13,6 @@ import com.example.gametetrisdaniel.Pecas.*
 import kotlinx.android.synthetic.main.activity_jogar.*
 import java.util.*
 import kotlin.random.Random
-//import com.example.gametetrisdaniel.R
 import android.R.attr.start
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
@@ -233,6 +232,12 @@ class Jogar : AppCompatActivity() {
 
         novaPeca = random.nextInt(5)
 
+        mudaProximaPeca()
+
+
+    }
+
+    fun mudaProximaPeca(){
         if(novaPeca == 0){
             proximaImageView.setImageResource(R.drawable.l_peca)
         }else if(novaPeca == 1){
@@ -244,8 +249,6 @@ class Jogar : AppCompatActivity() {
         }else{
             proximaImageView.setImageResource(R.drawable.t_peca)
         }
-
-
     }
 
     fun bateuPeca():Boolean{
@@ -401,6 +404,9 @@ class Jogar : AppCompatActivity() {
         edit.putInt("pieceColor",pt.getColorPiece())
         Log.i("RESTAURACAO", "cor = " + pt.getColorPiece())
 
+        edit.putString("pontuacao", pontuacao.text.toString())
+        edit.putInt("novaPeca", novaPeca)
+
         edit.commit()
 
     }
@@ -424,7 +430,9 @@ class Jogar : AppCompatActivity() {
         pt.pontoD.linha = setting.getInt("ponto_D_linha",0)
         pt.pontoD.coluna = setting.getInt("ponto_D_coluna",0)
 
-
+        pontuacao.text = setting.getString("pontuacao","")
+        novaPeca = setting.getInt("novaPeca", 0)
+        mudaProximaPeca()
 
         pt.setColorPiece(setting.getInt("pieceColor",R.color.branco))
         desenharPeca()
